@@ -19,6 +19,9 @@ import { UserProvider } from "./helpers/context";
 import StaffPagePathLayout from "./pathLayout/StaffPagePathLayout";
 import StaffDashboard from "./users/staff/StaffDashboard";
 import SignUpForm from "./components/guest/SignUpForm";
+import StaffEvents from "./users/staff/StaffEvents";
+import StaffQR from "./users/staff/StaffQR";
+import StaffActivities from "./users/staff/StaffActivities";
 // import { useEffect } from "react";
 
 const router = createBrowserRouter(
@@ -40,6 +43,9 @@ const router = createBrowserRouter(
       <Route path="/staff" element={<StaffPagePathLayout />}>
         <Route index element={<Navigate to="dashboard" />}></Route>
         <Route path="dashboard" element={<StaffDashboard />}></Route>
+        <Route path="events" element={<StaffEvents />}></Route>
+        <Route path="qr" element={<StaffQR />}></Route>
+        <Route path="activities" element={<StaffActivities />}></Route>
       </Route>
     </Route>
   )

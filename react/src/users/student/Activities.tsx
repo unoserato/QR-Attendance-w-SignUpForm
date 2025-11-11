@@ -103,56 +103,56 @@ function Activities() {
                   onClick={() => handleOpenAct(act)}
                 >
                   <div className="flex justify-between">
-                    <p className="font-semibold">{act.name}</p>
+                    <div className="flex flex-col">
+                      <h2 className="font-semibold">{act.name}</h2>
+                      <p className="text-xs text-gray-600">
+                        {getEventName(act.eventID)}
+                      </p>
+                    </div>
                     <div
-                      className={`flex items-center py-1 px-2 rounded-full text-[8px] font-bold text-white ${
+                      className={`flex items-center h-fit py-1 px-2 rounded-full text-[8px] font-bold text-white ${
                         act.attended ? "bg-green-500" : "bg-red-500"
                       }`}
                     >
                       {act.attended ? "Attended" : "Did not Attend"}
                     </div>
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <p className="text-xs text-gray-600">
-                      {getEventName(act.eventID)}
-                    </p>
-                    <div className="flex items-center gap-1 text-xs font-semibold text-neutral-600">
-                      <CiCalendar size="1.2rem" />
-                      <span>
-                        {new Date(act.startDate).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        })}
-                      </span>
-                      -
-                      <span>
-                        {new Date(act.endDate).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        })}
-                      </span>
+                  <div className="flex justify-between">
+                    <div className="flex flex-col gap-1 p-1 w-full">
+                      <div className="flex items-center gap-1 text-sm font-semibold text-neutral-600">
+                        <CiCalendar size="1.2rem" />
+                        <span>
+                          {new Date(act.startDate).toLocaleDateString("en-US", {
+                            month: "long",
+                            day: "numeric",
+                            year: "numeric",
+                          })}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1 text-xs font-semibold text-neutral-600">
+                        <CiLocationOn size="1.2rem" />
+                        <span>{act.location}</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-xs text-neutral-600">
+                        <IoTimeOutline size="1.2rem" />
+                        <span>
+                          {new Date(act.startDate).toLocaleTimeString("en-US", {
+                            hour: "numeric",
+                            minute: "numeric",
+                          })}
+                        </span>
+                        -
+                        <span>
+                          {new Date(act.endDate).toLocaleTimeString("en-US", {
+                            hour: "numeric",
+                            minute: "numeric",
+                          })}
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-1 text-xs font-semibold text-neutral-600">
-                      <IoTimeOutline size="1.2rem" />
-                      <span>
-                        {new Date(act.startDate).toLocaleTimeString("en-US", {
-                          hour: "numeric",
-                          minute: "numeric",
-                        })}
-                      </span>
-                      -
-                      <span>
-                        {new Date(act.endDate).toLocaleTimeString("en-US", {
-                          hour: "numeric",
-                          minute: "numeric",
-                        })}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-1 text-sm font-semibold text-neutral-600">
-                      <CiLocationOn size="1.2rem" />
-                      <span>{act.location}</span>
+                    <div className="flex flex-col p-2 w-fit aspect-square rounded-full items-center justify-center">
+                      <p className="text-xs">Points</p>
+                      <p className="font-bold text-xl">{act.points}</p>
                     </div>
                   </div>
                 </li>

@@ -24,6 +24,10 @@ function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
+  // New state for validation messages
+  const [studentIdError, setStudentIdError] = useState("");
+  const [ageError, setAgeError] = useState("");
+
   const trackOptions = [
     "BS Information Technology",
     "BS Information Systems",
@@ -31,6 +35,7 @@ function SignUpForm() {
   ];
 
   const yearOptions = ["1", "2", "3", "4"];
+  const sectionOptions = ["A", "B", "C", "D"];
 
   const bsitMajors = [
     "Networking",
@@ -54,6 +59,38 @@ function SignUpForm() {
       }
     }
 
+    // Student ID validation and auto-formatting (NEW)
+    if (name === "studentID") {
+      let raw = value.replace(/\D/g, ""); // remove all non-digits
+      if (raw.length > 8) raw = raw.slice(0, 8); // limit to 8 digits
+      let formatted = raw;
+      if (raw.length > 4) {
+        formatted = `${raw.slice(0, 4)}-${raw.slice(4)}`;
+      }
+      setFormData({ ...formData, studentID: formatted });
+
+      // Regex: must be 4 digits - 4 digits (numbers only, 0000-0000 allowed)
+      const regex = /^\d{4}-\d{4}$/;
+      if (formatted && !regex.test(formatted)) {
+        setStudentIdError("Student ID must follow the format 0000-0000.");
+      } else {
+        setStudentIdError("");
+      }
+      return;
+    }
+
+    // Age validation (NEW)
+    if (name === "age") {
+      const ageValue = parseInt(value, 10);
+      if (isNaN(ageValue) || ageValue < 12 || ageValue > 100) {
+        setAgeError("Age must be between 12 and 100 years old.");
+      } else {
+        setAgeError("");
+      }
+      setFormData({ ...formData, [name]: value });
+      return;
+    }
+
     setFormData({ ...formData, [name]: value });
   }
 
@@ -67,6 +104,14 @@ function SignUpForm() {
       if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
         age--;
       }
+
+      // Check if age is valid (NEW)
+      if (age < 12 || age > 100) {
+        setAgeError("Age must be between 12 and 100 years old.");
+      } else {
+        setAgeError("");
+      }
+
       setFormData((prev) => ({ ...prev, age: age.toString() }));
     }
   }, [formData.birthDate]);
@@ -87,6 +132,18 @@ function SignUpForm() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
+    // Prevent submission if Student ID is invalid
+    if (studentIdError) {
+      alert("Please enter a valid Student ID before submitting.");
+      return;
+    }
+
+    // Prevent submission if age is invalid
+    if (ageError) {
+      alert("Please enter a valid age (12–100).");
+      return;
+    }
+
     if (!formData.email.endsWith("@lspu.edu.ph")) {
       alert("Email must be a @lspu.edu.ph address!");
       return;
@@ -103,8 +160,8 @@ function SignUpForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-10">
-      <div className="w-full p-2">
+    <div className="flex w-screen items-center justify-center bg-gray-50 px-4 md:px-20 py-10">
+      <div className="w-full">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-blue-900">
             Create Your Account
@@ -115,15 +172,12 @@ function SignUpForm() {
         </div>
 
         <form
-          className="flex flex-col gap-4 bg-white rounded-2xl shadow-lg p-10"
+          className="flex flex-col gap-4 bg-white rounded-2xl shadow-lg p-10 text-xs md:text-sm "
           onSubmit={handleSubmit}
         >
           {/* Email */}
           <div className="flex flex-col">
-            <label
-              htmlFor="email"
-              className="text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="email" className="font-medium text-gray-700">
               Email
             </label>
             <input
@@ -141,28 +195,46 @@ function SignUpForm() {
           {/* Student ID & Age */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-700">
-                Student ID
-              </label>
+              <label className=" font-medium text-gray-700">Student ID</label>
               <input
                 type="text"
                 name="studentID"
-                placeholder="Student ID"
+                placeholder="0000-0000"
                 value={formData.studentID}
-                className="mt-2 p-3 rounded-xl bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-900"
+                className={`mt-2 p-3 rounded-xl focus:outline-none focus:ring-2 ${
+                  studentIdError
+                    ? "bg-red-100 ring-red-500"
+                    : "bg-gray-100 focus:ring-blue-900"
+                }`}
                 onChange={handleChange}
                 required
               />
+              {/* Display Student ID Error (NEW) */}
+              {studentIdError && (
+                <span className="text-red-600 text-xs mt-1">
+                  {studentIdError}
+                </span>
+              )}
             </div>
+
             <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-700">Age</label>
+              <label className=" font-medium text-gray-700">Age</label>
               <input
                 type="number"
                 name="age"
                 value={formData.age}
+                placeholder="Fill out birth date first"
                 readOnly
-                className="mt-2 p-3 rounded-xl bg-gray-200 focus:outline-none"
+                className={`mt-2 p-3 rounded-xl ${
+                  ageError
+                    ? "bg-red-100 ring-red-500"
+                    : "bg-gray-200 focus:outline-none"
+                }`}
               />
+              {/* Display Age Error (NEW) */}
+              {ageError && (
+                <span className="text-red-600 text-xs mt-1">{ageError}</span>
+              )}
             </div>
           </div>
 
@@ -170,7 +242,7 @@ function SignUpForm() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {["firstName", "middleName", "lastName"].map((field, idx) => (
               <div key={idx} className="flex flex-col">
-                <label className="text-sm font-medium text-gray-700">
+                <label className=" font-medium text-gray-700">
                   {field === "firstName"
                     ? "First Name"
                     : field === "middleName"
@@ -180,7 +252,9 @@ function SignUpForm() {
                 <input
                   type="text"
                   name={field}
-                  placeholder={field.replace(/([A-Z])/g, " $1")}
+                  placeholder={field
+                    .replace(/([A-Z])/g, " $1")
+                    .replace(/^./, (str) => str.toUpperCase())}
                   value={formData[field as keyof typeof formData]}
                   className="mt-2 p-3 rounded-xl bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-900"
                   onChange={handleChange}
@@ -193,9 +267,7 @@ function SignUpForm() {
           {/* BirthDate & Year */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-700">
-                Birth Date
-              </label>
+              <label className=" font-medium text-gray-700">Birth Date</label>
               <input
                 type="date"
                 name="birthDate"
@@ -205,7 +277,7 @@ function SignUpForm() {
               />
             </div>
             <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-700">Year</label>
+              <label className=" font-medium text-gray-700">Year</label>
               <select
                 name="year"
                 value={formData.year}
@@ -227,20 +299,26 @@ function SignUpForm() {
           {/* Section, Track, Major */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-700">
-                Section
-              </label>
-              <input
-                type="text"
+              <label className=" font-medium text-gray-700">Section</label>
+              <select
                 name="section"
                 value={formData.section}
                 className="mt-2 p-3 rounded-xl bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-900"
                 onChange={handleChange}
-              />
+              >
+                <option value="" disabled hidden>
+                  Select Section
+                </option>
+                {sectionOptions.map((section) => (
+                  <option key={section} value={section}>
+                    {section}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-700">Track</label>
+              <label className=" font-medium text-gray-700">Track</label>
               <select
                 name="track"
                 value={formData.track}
@@ -259,7 +337,7 @@ function SignUpForm() {
             </div>
 
             <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-700">Major</label>
+              <label className=" font-medium text-gray-700">Major</label>
               <select
                 name="major"
                 value={formData.major}
@@ -287,9 +365,7 @@ function SignUpForm() {
 
           {/* Password */}
           <div className="flex flex-col relative">
-            <label className="text-sm font-medium text-gray-700">
-              Password
-            </label>
+            <label className=" font-medium text-gray-700">Password</label>
             <input
               type={showPassword ? "text" : "password"}
               name="password"
@@ -310,7 +386,7 @@ function SignUpForm() {
 
           {/* Confirm Password */}
           <div className="flex flex-col relative">
-            <label className="text-sm font-medium text-gray-700">
+            <label className=" font-medium text-gray-700">
               Confirm Password
             </label>
             <input
@@ -339,7 +415,7 @@ function SignUpForm() {
             >
               Register
             </button>
-            <p className="text-gray-500 text-sm text-center sm:text-left">
+            <p className="text-gray-500  text-center sm:text-left">
               Already have an account?{" "}
               <b
                 className="text-blue-900 underline cursor-pointer"

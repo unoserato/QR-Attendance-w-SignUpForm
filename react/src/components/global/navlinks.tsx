@@ -3,7 +3,7 @@ import { IoMdQrScanner } from "react-icons/io";
 import { LuActivity } from "react-icons/lu";
 import { MdDashboard, MdEvent } from "react-icons/md";
 
-export const userLinks = [
+export const studentLinks = [
   {
     name: "Dashboard",
     path: "/student/dashboard",
@@ -32,9 +32,38 @@ export const userLinks = [
   },
 ];
 
+export const staffLinks = [
+  {
+    name: "Dashboard",
+    path: "/staff/dashboard",
+    icon: <MdDashboard />,
+  },
+  {
+    name: "Events",
+    path: "/staff/events",
+    icon: <MdEvent />,
+  },
+  {
+    name: "QR",
+    path: "/staff/qr",
+    icon: <IoMdQrScanner />,
+  },
+  {
+    name: "Activities",
+    path: "/staff/activities",
+    icon: <LuActivity />,
+  },
+
+  {
+    name: "Profile",
+    path: "/staff/profile",
+    icon: <FaUserCircle />,
+  },
+];
+
 export const guestLinks = [
   {
-    name: "Landing",
+    name: "Home",
     path: "/",
   },
   {

@@ -11,8 +11,8 @@ function RootPathLayout() {
 
     if (isLoggedIn) {
       accessMode
-        ? navigate("/staff", { replace: true })
-        : navigate("/student", { replace: true });
+        ? navigate("/staff/dashboard", { replace: true })
+        : navigate("/student/dashboard", { replace: true });
     } else {
       navigate("/", { replace: true });
     }

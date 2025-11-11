@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import StaffHeader from "../components/users/staff/StaffHeader";
+import StaffNavbar from "../components/users/staff/StaffNavbar";
 
 function StaffPagePathLayout() {
   return (
@@ -9,6 +10,7 @@ function StaffPagePathLayout() {
         <main className="h-full overflow-y-auto">
           <Outlet />
         </main>
+        <StaffNavbar />
       </div>
     </>
   );

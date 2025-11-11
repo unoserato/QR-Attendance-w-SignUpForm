@@ -25,7 +25,7 @@ function LoginForm() {
         className="flex flex-col gap-5 px-2 rounded bg-white w-full"
       >
         <span className="flex flex-col ">
-          <label htmlFor="email" className="text-sm">
+          <label htmlFor="email" className="text-sm text-neutral-500">
             Email
           </label>
           <input
@@ -33,13 +33,13 @@ function LoginForm() {
             id="email"
             name="email"
             placeholder="Email"
-            className="p-2 focus:outline-blue-500 rounded-xl placeholder:font-light bg-neutral-200"
+            className="pl-4 py-3 text-xs md:text-sm focus:outline-blue-500 rounded-xl placeholder:font-light bg-neutral-100"
             required
             onChange={(e) => setEmail(e.target.value)}
           />
         </span>
         <span className="flex flex-col relative">
-          <label htmlFor="email" className="text-sm">
+          <label htmlFor="email" className="text-sm text-neutral-500">
             Password
           </label>
           <input
@@ -47,7 +47,7 @@ function LoginForm() {
             id="password"
             name="password"
             placeholder="Password"
-            className="p-2 rounded-xl placeholder:font-light focus:outline-blue-500 bg-neutral-200"
+            className="pl-4 py-3 text-xs md:text-sm rounded-xl placeholder:font-light focus:outline-blue-500 bg-neutral-100"
             required
             onChange={(e) => setPassword(e.target.value)}
           />
