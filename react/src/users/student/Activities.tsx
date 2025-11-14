@@ -1,22 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FullPageLoader from "../../components/global/FullPageLoader";
 import activitiesList from "../../helpers/activityList";
 import eventList from "../../helpers/eventList";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { CiCalendar, CiLocationOn } from "react-icons/ci";
 import { IoTimeOutline } from "react-icons/io5";
+import attendanceList from "../../helpers/attendance";
+import { useUserContext } from "../../helpers/context";
 
 function Activities() {
+  const { user } = useUserContext();
   const acts = activitiesList || [];
   const events = eventList || [];
   const [openAct, setOpenAct] = useState(false);
   const [selectedAct, setSelectedAct] = useState<any>(null);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
+  const [attendedIDs, setAttendedIDs] = useState<number[]>([]);
 
   if (!acts || !events) {
     return <FullPageLoader />;
   }
+
+  useEffect(() => {
+    if (!user) return; // wait until user is available
+
+    const ids = attendanceList
+      .filter((att) => att.studentID === user.studentID)
+      .map((att) => att.actID);
+
+    setAttendedIDs(ids);
+  }, []);
 
   // compute filtered list without mutating original `acts`
   const filteredActs = acts
@@ -98,7 +112,7 @@ function Activities() {
                 <li
                   key={act.id}
                   className={`flex flex-col p-3 pb-4 rounded-lg shadow-md border border-gray-200 ${
-                    act.attended ? "bg-white" : "bg-red-500/10"
+                    attendedIDs.includes(act.id) ? "bg-white" : "bg-red-500/10"
                   }`}
                   onClick={() => handleOpenAct(act)}
                 >
@@ -111,10 +125,14 @@ function Activities() {
                     </div>
                     <div
                       className={`flex items-center h-fit py-1 px-2 rounded-full text-[8px] font-bold text-white ${
-                        act.attended ? "bg-green-500" : "bg-red-500"
+                        attendedIDs.includes(act.id)
+                          ? "bg-green-500"
+                          : "bg-red-500"
                       }`}
                     >
-                      {act.attended ? "Attended" : "Did not Attend"}
+                      {attendedIDs.includes(act.id)
+                        ? "Attended"
+                        : "Did not Attend"}
                     </div>
                   </div>
                   <div className="flex justify-between">

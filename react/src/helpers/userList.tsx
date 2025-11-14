@@ -57,6 +57,21 @@ const userList = [
     course: "Information Technology",
     major: "No Major",
     profileURL: "/profiles/0224-0797.jpeg",
+    isStaff: true,
+    role: "PIO",
+  },
+  {
+    id: 4,
+    studentID: "1234-5678",
+    lastName: "lastName",
+    firstName: "firstName",
+    middleName: "middleName",
+    age: 20,
+    year: 3,
+    section: "B",
+    course: "Information Technology",
+    major: "Animation and Motion Graphics",
+    profileURL: "/profiles/0223-2128.jpeg",
     isStaff: false,
     role: "Student",
   },
@@ -82,6 +97,11 @@ const userCredentials = [
     studentID: "0224-0797",
     email: "rommeljireh.libarnes@lspu.edu.ph",
     password: "rommeljireh",
+  },
+  {
+    studentID: "0224-0797",
+    email: "guest@lspu.edu.ph",
+    password: "guest123",
   },
 ];
 

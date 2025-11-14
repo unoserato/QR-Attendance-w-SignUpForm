@@ -3,18 +3,33 @@ import FullPageLoader from "../../components/global/FullPageLoader";
 import activitiesList from "../../helpers/activityList";
 import { useUserContext } from "../../helpers/context";
 import { useNavigate } from "react-router-dom";
+import attendanceList from "../../helpers/attendance";
+import { useEffect, useState } from "react";
+import { SiGoogleclassroom } from "react-icons/si";
 
 function Dashboard() {
   const { user, mode } = useUserContext();
-  const acts = activitiesList || [];
-  const unattendedCount = acts.filter((act) => act.attended === false).length;
   const navigate = useNavigate();
+  const [unattendedCount, setunattendedCount] = useState(0);
   // const unattendedCount = 0;
+
+  useEffect(() => {
+    // 1. Get the IDs of the activities this student attended
+    const attendedIDs = attendanceList
+      .filter((att) => att.studentID === user?.studentID)
+      .map((att) => att.actID);
+
+    // 2. Get the activities the student did NOT attend
+    const notAttended = activitiesList.filter(
+      (act) => !attendedIDs.includes(act.id)
+    );
+
+    setunattendedCount(notAttended.length);
+  }, []);
 
   if (!user) {
     return <FullPageLoader />;
   }
-
   return (
     <>
       <div className="w-full h-full overflow-y-auto">
@@ -76,6 +91,19 @@ function Dashboard() {
                 <p className="whitespace-nowrap">Generate QR</p>
               </div>
             )}
+          </div>
+          {/* grid */}
+          <div className="grid grid-cols-2 grid-rows-2 shadow-md bg-blue-900 rounded-xl p-4 gap-2">
+            <div className="flex items-center gap-4 text-white rounded-md bg-white/10 p-4 h-20">
+              <p className="text-2xl font-bold text-center">50</p>
+              <p>Points Remaining</p>
+            </div>
+            <div className="flex items-center gap-4 text-white rounded-md bg-white/10 p-4 h-20">
+              <SiGoogleclassroom size={"2rem"} />
+              <p>Go to Classroom</p>
+            </div>
+            <div className="flex items-center col-span-2 justify-between text-white rounded-md bg-white/10 p-4 h-20"></div>
+            <div className="flex items-center justify-between text-white rounded-md bg-white/10 p-4 h-20"></div>
           </div>
         </div>
       </div>

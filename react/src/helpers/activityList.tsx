@@ -5,10 +5,10 @@ const activitiesList = [
     name: "Basketball",
     desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
     points: 10,
-    attended: false,
     location: "Gym",
     startDate: "2025-11-21T08:00:00",
     endDate: "2025-11-25T15:00:00",
+    scannerRole: "",
   },
   {
     id: 2,
@@ -16,10 +16,10 @@ const activitiesList = [
     name: "Volleyball",
     desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
     points: 10,
-    attended: true,
     location: "Gym",
     startDate: "2025-11-25T08:00:00",
     endDate: "2025-11-25T15:00:00",
+    scannerRole: "Secretary",
   },
   {
     id: 3,
@@ -27,10 +27,10 @@ const activitiesList = [
     name: "Act1 for event 2",
     desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
     points: 10,
-    attended: true,
     location: "Gym",
     startDate: "2025-11-25T07:00:00",
     endDate: "2025-11-25T15:00:00",
+    scannerRole: "",
   },
   {
     id: 4,
@@ -38,10 +38,10 @@ const activitiesList = [
     name: "Act2 for event 2",
     desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
     points: 10,
-    attended: false,
     location: "LSPU Gymasium",
     startDate: "2025-11-25T08:00:00",
     endDate: "2025-11-25T15:00:00",
+    scannerRole: "",
   },
   {
     id: 5,
@@ -49,10 +49,10 @@ const activitiesList = [
     name: "Act1 for event 3",
     desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
     points: 10,
-    attended: false,
     location: "Gym",
     startDate: "2025-11-25T08:00:00",
     endDate: "2025-11-25T15:00:00",
+    scannerRole: "",
   },
   {
     id: 6,
@@ -60,11 +60,23 @@ const activitiesList = [
     name: "Act2 for event 3",
     desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
     points: 10,
-    attended: false,
     location: "Gym",
     startDate: "2025-11-25T08:00:00",
     endDate: "2025-11-25T15:00:00",
+    scannerRole: "",
   },
 ];
+
+export interface ActivityType {
+  id: number;
+  eventID: number;
+  name: string;
+  desc: string;
+  points: number;
+  location: string;
+  startDate: string;
+  endDate: string;
+  scannerRole: string;
+}
 
 export default activitiesList;
