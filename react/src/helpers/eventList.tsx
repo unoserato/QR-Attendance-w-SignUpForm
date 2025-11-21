@@ -10,7 +10,7 @@ const eventList = [
   },
   {
     id: 2,
-    name: "Mock Event",
+    name: "Mock Event 1",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium reprehenderit sapiente, sunt est quis, amet unde nemo quia voluptates suscipit doloribus. Nesciunt minus quae, distinctio commodi ipsum ad! Eaque, optio!",
     startDate: "2025-11-04T08:00:00",
@@ -20,7 +20,7 @@ const eventList = [
   },
   {
     id: 3,
-    name: "Mock Event",
+    name: "Mock Event 2",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium reprehenderit sapiente, sunt est quis, amet unde nemo quia voluptates suscipit doloribus. Nesciunt minus quae, distinctio commodi ipsum ad! Eaque, optio!",
     startDate: "2025-11-04T08:00:00",
@@ -30,7 +30,7 @@ const eventList = [
   },
   {
     id: 4,
-    name: "Mock Event",
+    name: "Mock Event 3",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium reprehenderit sapiente, sunt est quis, amet unde nemo quia voluptates suscipit doloribus. Nesciunt minus quae, distinctio commodi ipsum ad! Eaque, optio!",
     startDate: "2025-11-04T08:00:00",
@@ -40,7 +40,7 @@ const eventList = [
   },
   {
     id: 5,
-    name: "Upcoming Event",
+    name: "Upcoming Event 4",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium reprehenderit sapiente, sunt est quis, amet unde nemo quia voluptates suscipit doloribus. Nesciunt minus quae, distinctio commodi ipsum ad! Eaque, optio!",
     startDate: "2025-11-20T08:00:00",
@@ -50,7 +50,7 @@ const eventList = [
   },
   {
     id: 6,
-    name: "Upcoming Event",
+    name: "Upcoming Event 5",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium reprehenderit sapiente, sunt est quis, amet unde nemo quia voluptates suscipit doloribus. Nesciunt minus quae, distinctio commodi ipsum ad! Eaque, optio!",
     startDate: "2025-11-01T08:00:00",

@@ -21,15 +21,15 @@ function StaffQR() {
     if (matchedAct) setScannerFor(matchedAct);
   }, [user, acts]);
 
-  function playBeep() {
-    const audioCtx = new AudioContext();
-    const oscillator = audioCtx.createOscillator();
-    oscillator.type = "sine"; // sine wave
-    oscillator.frequency.value = 1000; // 1000 Hz beep
-    oscillator.connect(audioCtx.destination);
-    oscillator.start();
-    oscillator.stop(audioCtx.currentTime + 0.1); // 0.1 second beep
-  }
+  // function playBeep() {
+  //   const audioCtx = new AudioContext();
+  //   const oscillator = audioCtx.createOscillator();
+  //   oscillator.type = "sine"; // sine wave
+  //   oscillator.frequency.value = 1000; // 1000 Hz beep
+  //   oscillator.connect(audioCtx.destination);
+  //   oscillator.start();
+  //   oscillator.stop(audioCtx.currentTime + 0.1); // 0.1 second beep
+  // }
 
   // automatic scan
   function handleScan(scan: IDetectedBarcode[] | null) {

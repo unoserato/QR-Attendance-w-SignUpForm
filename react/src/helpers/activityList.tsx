@@ -1,4 +1,4 @@
-const activitiesList = [
+const activityList = [
   {
     id: 1,
     eventID: 1,
@@ -12,7 +12,7 @@ const activitiesList = [
   },
   {
     id: 2,
-    eventID: 1,
+    eventID: 2,
     name: "Volleyball",
     desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
     points: 10,
@@ -23,7 +23,7 @@ const activitiesList = [
   },
   {
     id: 3,
-    eventID: 2,
+    eventID: 3,
     name: "Act1 for event 2",
     desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
     points: 10,
@@ -34,7 +34,7 @@ const activitiesList = [
   },
   {
     id: 4,
-    eventID: 2,
+    eventID: 4,
     name: "Act2 for event 2",
     desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
     points: 10,
@@ -45,7 +45,7 @@ const activitiesList = [
   },
   {
     id: 5,
-    eventID: 3,
+    eventID: 5,
     name: "Act1 for event 3",
     desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
     points: 10,
@@ -56,7 +56,7 @@ const activitiesList = [
   },
   {
     id: 6,
-    eventID: 3,
+    eventID: 6,
     name: "Act2 for event 3",
     desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
     points: 10,
@@ -79,4 +79,4 @@ export interface ActivityType {
   scannerRole: string;
 }
 
-export default activitiesList;
+export default activityList;

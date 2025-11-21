@@ -1,4 +1,5 @@
 import FullPageLoader from "../../components/global/FullPageLoader";
+import AttendanceByEventChart from "../../components/users/staff/charts/AttendancePerEvent";
 import { useUserContext } from "../../helpers/context";
 
 function StaffDashboard() {
@@ -11,7 +12,8 @@ function StaffDashboard() {
   return (
     <div className="w-full h-full overflow-y-auto">
       <div className="flex flex-col gap-2 p-4 w-full">
-        <div className="flex flex-col gap-1 py-4">
+        {/* greetings */}
+        {/* <div className="flex flex-col gap-1 py-4">
           <h2 className="text-3xl font-bold">
             Welcome, <br />{" "}
             <span className="text-blue-500">
@@ -26,8 +28,9 @@ function StaffDashboard() {
               year: "numeric",
             })}
           </p>
-        </div>
-        <div className="flex justify-between items-center border bg-white text-blue-900 rounded-xl p-4">
+        </div> */}
+        {/* switch card */}
+        {/* <div className="flex justify-between items-center border bg-white text-blue-900 rounded-xl p-4">
           <span className="text-md ">You are currently in Staff Access</span>
           <button
             className="text-xs font-semibold p-2 rounded-xl bg-blue-900 text-white"
@@ -37,6 +40,10 @@ function StaffDashboard() {
           >
             Switch to Student Mode
           </button>
+        </div> */}
+        {/* bar graph */}
+        <div className="w-full shadow-md rounded-xl">
+          <AttendanceByEventChart />
         </div>
       </div>
     </div>
