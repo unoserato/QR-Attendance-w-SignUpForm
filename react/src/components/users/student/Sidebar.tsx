@@ -4,6 +4,7 @@ type SidebarProps = {
 };
 
 function Sidebar({ open }: SidebarProps) {
+  // unused sidebar
   return (
     <div
       className={`absolute top-0 transition-all duration-300 ease-in-out left-0 w-dvw h-dvh bg-black/20 z-1 ${

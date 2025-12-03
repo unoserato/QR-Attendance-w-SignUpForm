@@ -27,8 +27,8 @@ const userList = [
     course: "Information Technology",
     major: "Web and Mobile Application Development",
     profileURL: "/profiles/0223-2128.jpg",
-    isStaff: false,
-    role: "Student",
+    isStaff: true,
+    role: "President",
   },
   {
     id: 3,
@@ -61,7 +61,22 @@ const userList = [
     role: "PIO",
   },
   {
-    id: 4,
+    id: 5,
+    studentID: "0225-1214",
+    lastName: "Penid",
+    firstName: "Jesrod Shem",
+    middleName: "Timbang",
+    age: 19,
+    year: 1,
+    section: "A",
+    course: "Mechanical Engineer",
+    major: "No Major",
+    profileURL: "/profiles/0224-0797.jpeg",
+    isStaff: true,
+    role: "Student",
+  },
+  {
+    id: 6,
     studentID: "1234-5678",
     lastName: "lastName",
     firstName: "firstName",
@@ -99,6 +114,11 @@ const userCredentials = [
     password: "rommeljireh",
   },
   {
+    studentID: "0225-1214",
+    email: "jesrodshem.penid@lspu.edu.ph",
+    password: "jesrodshem",
+  },
+  {
     studentID: "0224-0797",
     email: "guest@lspu.edu.ph",
     password: "guest123",
@@ -118,6 +138,11 @@ export function checkCredentials(email: string, password: string) {
   );
   localStorage.setItem("user", JSON.stringify(foundUser));
   return foundUser;
+}
+
+export function getStudentById(id: string) {
+  const student = userList.find((u) => u.studentID === id);
+  return student;
 }
 
 export interface User {

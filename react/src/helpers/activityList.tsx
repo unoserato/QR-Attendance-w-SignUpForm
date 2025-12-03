@@ -1,3 +1,5 @@
+import eventList from "./eventList";
+
 const activityList = [
   {
     id: 1,
@@ -30,7 +32,7 @@ const activityList = [
     location: "Gym",
     startDate: "2025-11-25T07:00:00",
     endDate: "2025-11-25T15:00:00",
-    scannerRole: "",
+    scannerRole: "CS Representative",
   },
   {
     id: 4,
@@ -41,7 +43,7 @@ const activityList = [
     location: "LSPU Gymasium",
     startDate: "2025-11-25T08:00:00",
     endDate: "2025-11-25T15:00:00",
-    scannerRole: "",
+    scannerRole: "IT Representative",
   },
   {
     id: 5,
@@ -52,7 +54,7 @@ const activityList = [
     location: "Gym",
     startDate: "2025-11-25T08:00:00",
     endDate: "2025-11-25T15:00:00",
-    scannerRole: "",
+    scannerRole: "P.I.O. 2",
   },
   {
     id: 6,
@@ -63,7 +65,7 @@ const activityList = [
     location: "Gym",
     startDate: "2025-11-25T08:00:00",
     endDate: "2025-11-25T15:00:00",
-    scannerRole: "",
+    scannerRole: "P.I.O. 1",
   },
 ];
 
@@ -77,6 +79,13 @@ export interface ActivityType {
   startDate: string;
   endDate: string;
   scannerRole: string;
+}
+
+// function
+const events = eventList;
+export function getEventName(id: number) {
+  const ev = events.find((e) => e.id === id);
+  return ev ? ev.name : "Unknown Event";
 }
 
 export default activityList;

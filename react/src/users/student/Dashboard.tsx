@@ -59,7 +59,6 @@ function Dashboard() {
                 className="text-xs font-semibold p-3 rounded-full bg-white text-blue-900"
                 onClick={() => {
                   mode();
-                  console.log("clicked");
                 }}
               >
                 Switch to Staff Mode

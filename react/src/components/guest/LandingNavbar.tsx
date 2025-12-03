@@ -45,7 +45,7 @@ function LandingNavbar() {
               setShowList(false);
             }} // close menu on click
           >
-            Attend<strong className="text-xl text-blue-900">AMS</strong>
+            Attend<strong className="text-xl text-blue-900">Ex</strong>
           </div>
 
           <button

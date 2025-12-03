@@ -1,10 +1,19 @@
-import { IoIosMenu, IoMdNotifications } from "react-icons/io";
-import Sidebar from "./Sidebar";
-import { useState } from "react";
-import { IoCloseOutline } from "react-icons/io5";
+import { IoMdNotifications } from "react-icons/io";
+import { useUserContext } from "../../../helpers/context";
+import { NavLink, useLocation } from "react-router-dom";
 
 function Header() {
-  const [openSidebar, setOpenSidebar] = useState(false);
+  // const [openSidebar, setOpenSidebar] = useState(false);
+  const { user } = useUserContext();
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const currentPage =
+    currentPath.split("/")[2][0].toLocaleUpperCase() +
+    currentPath.split("/")[2].slice(1);
+
+  if (!user) {
+    return;
+  }
 
   return (
     <>
@@ -14,17 +23,36 @@ function Header() {
           className="
                     flex justify-between items-center 
                     w-full p-3 shadow
-                    shadow-neutral-100 bg-blue-900 text-white
+                    shadow-neutral-100
                     "
         >
-          <div className="font-semibold">
-            Attend<strong className="text-xl text-blue-400">EX</strong>
-            {/* Attend<strong className="text-xl text-blue-400">ify</strong> */}
-            {/* Event<strong className="text-xl text-blue-400">ify</strong> */}
-            {/* Attend<strong className="text-xl text-blue-400">AMS</strong> */}
+          <div className="font-semibold text-xl">
+            {currentPage == "Dashboard" ? (
+              <p>
+                Attend<strong className="text-xl text-blue-500">EX</strong>
+              </p>
+            ) : (
+              <p>{currentPage}</p>
+            )}
           </div>
           <div className="flex gap-2 items-center relative">
-            <IoMdNotifications size="clamp(1.5rem,3dvh,3rem)" fill="white" />
+            <div className="relative">
+              <div className="absolute top-0.5 right-0.5 animate-pulse bg-red-500 rounded-full w-2 h-2"></div>
+              <IoMdNotifications size="clamp(1.5rem,3dvh,3rem)" fill="#333" />
+            </div>
+            <NavLink
+              to={"profile"}
+              className={({ isActive }) =>
+                `${isActive ? "drop-shadow-[0_0_2px_#1c389e]" : ""}`
+              }
+            >
+              <img
+                src={user.profileURL}
+                alt="Profile"
+                className="object-cover border border-blue-900 w-[clamp(2rem,3dvh,3rem)] rounded-full aspect-square"
+              />
+            </NavLink>
+            {/* sidebar test below */}
             {/* {!openSidebar ? (
               <IoIosMenu
                 size="clamp(1.5rem,3dvh,3rem)"
@@ -39,7 +67,6 @@ function Header() {
               />
             )} */}
           </div>
-          <Sidebar open={openSidebar} />
         </div>
       </header>
     </>

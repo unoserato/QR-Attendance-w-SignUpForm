@@ -33,7 +33,7 @@ function Profile() {
     <>
       <div className="flex flex-col gap-2 w-full p-4">
         {/* image & id holder */}
-        <div className="flex flex-col shadow-md pt-15 rounded-2xl p-6">
+        <div className="flex flex-col shadow-md pt-0 rounded-2xl p-6">
           <div className="flex items-center justify-center w-full">
             <div className="flex flex-col items-center w-full">
               <a
@@ -46,14 +46,14 @@ function Profile() {
                   alt="Profile Picture"
                   width={200}
                   height={200}
-                  className="aspect-square object-cover border-10 border-blue-900 rounded-full"
+                  className="aspect-square object-cover border-10 border-neutral-700 rounded-full"
                 />
               </a>
               <div
-                className="flex flex-col gap-0 shadow-md items-center -mt-6 rounded-md z-10 bg-white"
+                className="flex flex-col gap-0 shadow-md items-center -mt-6 rounded-md bg-white"
                 onClick={() => navigate("/student/qr")}
               >
-                <PiIdentificationBadgeFill size={"3rem"} fill="#1c398e" />
+                <PiIdentificationBadgeFill size={"3rem"} fill="#404040" />
                 <p className="-mt-1 font-bold text-xs">ID</p>
               </div>
             </div>

@@ -14,7 +14,7 @@ function LoginForm() {
     e.preventDefault();
     login(email, password);
     if (user) {
-      navigate("/student", { replace: true });
+      navigate("/student/dashboard", { replace: true });
     }
   }
 

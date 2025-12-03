@@ -22,6 +22,9 @@ import SignUpForm from "./components/guest/SignUpForm";
 import StaffEvents from "./users/staff/StaffEvents";
 import StaffQR from "./users/staff/StaffQR";
 import StaffActivities from "./users/staff/StaffActivities";
+import ErrorPage from "./components/global/ErrorPage";
+import StaffAttendance from "./users/staff/StaffAttendance";
+import StaffEventsActivitites from "./users/staff/StaffEventsActivitites";
 // import { useEffect } from "react";
 
 const router = createBrowserRouter(
@@ -31,6 +34,7 @@ const router = createBrowserRouter(
         <Route index element={<LandingPage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="sign-up" element={<SignUpForm />} />
+        <Route path="*" element={<ErrorPage />}></Route>
       </Route>
       <Route path="student" element={<StudentPageLayout />}>
         <Route index element={<Navigate to="dashboard" />}></Route>
@@ -39,14 +43,19 @@ const router = createBrowserRouter(
         <Route path="qr" element={<QR />}></Route>
         <Route path="activities" element={<Activities />}></Route>
         <Route path="profile" element={<Profile />}></Route>
+        <Route path="*" element={<ErrorPage />}></Route>
       </Route>
       <Route path="/staff" element={<StaffPagePathLayout />}>
         <Route index element={<Navigate to="dashboard" />}></Route>
         <Route path="dashboard" element={<StaffDashboard />}></Route>
-        <Route path="events" element={<StaffEvents />}></Route>
+        {/* <Route path="events" element={<StaffEvents />}></Route> */}
+        <Route path="events" element={<StaffEventsActivitites />}></Route>
         <Route path="qr" element={<StaffQR />}></Route>
-        <Route path="activities" element={<StaffActivities />}></Route>
+        <Route path="attendance" element={<StaffAttendance />}></Route>
+        {/* <Route path="activities" element={<StaffActivities />}></Route> */}
+        <Route path="*" element={<ErrorPage />}></Route>
       </Route>
+      <Route path="*" element={<ErrorPage />}></Route>
     </Route>
   )
 );

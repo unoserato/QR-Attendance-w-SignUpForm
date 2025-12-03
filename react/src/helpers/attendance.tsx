@@ -44,6 +44,27 @@ const attendanceList = [
     actID: 6,
     studentID: "0224-0797",
   },
+  {
+    id: 7,
+    actID: 3,
+    studentID: "0223-2127",
+  },
 ];
+
+export function getAttendanceByActId(id: Number) {
+  const studentsList = attendanceList.filter((a) => a.actID === id);
+  return studentsList;
+}
+
+export function getAttendanceByStudentId(id: string) {
+  const attendance = attendanceList.filter((a) => a.studentID === id);
+  return attendance;
+}
+
+export interface AttendanceType {
+  id: number;
+  actID: number;
+  studentID: string;
+}
 
 export default attendanceList;

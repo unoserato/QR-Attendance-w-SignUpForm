@@ -9,6 +9,7 @@ interface UserContextType {
   accessMode: boolean;
   // loggedIn checker para di makapag edit ng URL
   isLoggedIn: boolean;
+  switchAnimation: boolean;
   login: (email: string, password: string) => void;
   mode: () => void;
   logout: () => void;
@@ -28,6 +29,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   const [loading, setLoading] = useState(true); // loading for slow render
   const [accessMode, setAccessMode] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [switchAnimation, setSwitchAnimation] = useState(false);
 
   // runs on mount
   useEffect(() => {
@@ -55,10 +57,14 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 
       // toggle the mode
       const newMode = !currentMode;
+      setSwitchAnimation(true);
 
       // update both state and sessionStorage
       setAccessMode(newMode);
       sessionStorage.setItem("accessMode", JSON.stringify(newMode));
+      setTimeout(() => {
+        setSwitchAnimation(false);
+      }, 2800);
     }
   };
 
@@ -84,7 +90,16 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <UserContext.Provider
-      value={{ user, loading, accessMode, isLoggedIn, login, mode, logout }}
+      value={{
+        user,
+        loading,
+        accessMode,
+        isLoggedIn,
+        switchAnimation,
+        login,
+        mode,
+        logout,
+      }}
     >
       {children}
     </UserContext.Provider>

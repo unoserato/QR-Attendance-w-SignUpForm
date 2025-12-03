@@ -20,38 +20,40 @@ function Events() {
     return <FullPageLoader />;
   }
 
-  // search logic
-  if (search.trim() !== "") {
-    events = events.filter((event) =>
-      event.name.toLowerCase().includes(search.toLowerCase())
+  const filteredEvents = events
+    .filter((e) => {
+      return search.trim() === ""
+        ? true
+        : e.name.toLowerCase().includes(search.trim().toLowerCase());
+    })
+    .filter((e) => {
+      if (filter === "") {
+        return true;
+      } else {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // normalize to midnight
+        const start = new Date(e.startDate);
+        const end = new Date(e.endDate);
+
+        // normalize for date-only comparison
+        start.setHours(0, 0, 0, 0);
+        end.setHours(0, 0, 0, 0);
+
+        if (filter === "today") {
+          return start <= today && end >= today; // Event happening today
+        }
+        if (filter === "upcoming") {
+          return start > today; // Future events
+        }
+        if (filter === "past") {
+          return end < today; // Events that have ended
+        }
+      }
+    })
+    .sort(
+      (a, b) =>
+        new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
     );
-  }
-
-  // filter logic
-  if (filter !== "") {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0); // normalize to midnight
-
-    events = events.filter((event) => {
-      const start = new Date(event.startDate);
-      const end = new Date(event.endDate);
-
-      // normalize for date-only comparison
-      start.setHours(0, 0, 0, 0);
-      end.setHours(0, 0, 0, 0);
-
-      if (filter === "today") {
-        return start <= today && end >= today; // Event happening today
-      }
-      if (filter === "upcoming") {
-        return start > today; // Future events
-      }
-      if (filter === "past") {
-        return end < today; // Events that have ended
-      }
-      return true;
-    });
-  }
 
   return (
     <div className="relative w-full h-full overflow-hidden">
@@ -63,13 +65,12 @@ function Events() {
       >
         {/* Header */}
         <div className="flex flex-col w-full gap-2 sticky top-0 p-4 bg-white">
-          <h2 className="text-xl font-semibold">Events</h2>
           <div className="flex items-center w-full gap-2">
             <span className="relative w-full">
               <input
                 type="text"
                 placeholder="Search events..."
-                className="text-xs outline-blue-500 flex items-center gap-2 bg-neutral-100 rounded w-full py-2 pl-8 text-neutral-700"
+                className="text-xs outline-blue-500 flex items-center gap-2 border-black/10 h-full border rounded w-full py-2 pl-8 text-[#333]"
                 onChange={(e) => setSearch(e.target.value)}
               />
               <HiMagnifyingGlass
@@ -80,7 +81,7 @@ function Events() {
             </span>
             <span className="flex justify-center flex-col">
               <select
-                className="bg-white outline-1 outline-neutral-400 rounded-lg p-2 text-xs font-bold"
+                className="outline-none bg-neutral-200 rounded p-2 text-xs font-bold"
                 onChange={(e) => setFilter(e.target.value)}
                 defaultValue=""
               >
@@ -94,7 +95,7 @@ function Events() {
         </div>
         {/* List */}
         <ul className="flex flex-col gap-4 p-4">
-          {events.map((event) => (
+          {filteredEvents.map((event) => (
             <li
               key={event.id}
               className="flex flex-col bg-white shadow-md rounded-xl overflow-hidden cursor-pointer transition-transform gap-4"

@@ -33,7 +33,6 @@ function QR() {
   return (
     <>
       <div className="flex flex-col gap-4 p-4">
-        <h2 className="text-xl font-semibold">QR Attendance</h2>
         <div className="flex flex-col gap-2 shadow-md bg-white aspect-square w-full rounded-xl border-t-5 border-t-blue-500 p-4">
           <div className="flex flex-col gap-1">
             <h2 className="text-xl font-semibold text-center">
