@@ -8,14 +8,15 @@ import {
 
 // eto yung parang parameters ng buong function
 interface UserContextType {
+  userType: "student" | "instructor" | "admin" | "";
   student: StudentType | null;
   instructor: InstructorType | null;
   loading: boolean;
   // global switching para pag refresh same mode parin
   accessMode: boolean;
+  switchAnimation: boolean;
   // loggedIn checker para di makapag edit ng URL
   isLoggedIn: boolean;
-  switchAnimation: boolean;
   login: (email: string, password: string) => void;
   mode: () => void;
   logout: () => void;
@@ -31,6 +32,9 @@ export const UserContext = createContext<UserContextType | undefined>(
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const [userType, setUserType] = useState<
+    "student" | "instructor" | "admin" | ""
+  >("");
   const [student, setStudent] = useState<StudentType | null>(null);
   const [instructor, setInstructor] = useState<InstructorType | null>(null);
   const [loading, setLoading] = useState(true); // loading for slow render
@@ -44,10 +48,14 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
 
-      if ("studentID" in parsedUser) {
-        setStudent(parsedUser);
+      if ("adminId" in parsedUser) {
+        setUserType("admin");
       } else if ("instructorId" in parsedUser) {
         setInstructor(parsedUser);
+        setUserType("instructor");
+      } else if ("studentID" in parsedUser) {
+        setStudent(parsedUser);
+        setUserType("student");
       }
       setIsLoggedIn(true);
     }
@@ -82,36 +90,47 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // dummy login function eto babaguhin mo
   const login = (email: string, password: string) => {
+    const foundAdmin = email === "admin@admin.com" && password === "admin123";
     const foundInstructor = checkInstructorCredentials(email, password);
     const foundStudent = checkCredentials(email, password);
-    console.log("reached Login Function");
+    let foundUser;
 
-    if (foundInstructor) {
+    if (foundAdmin) {
+      setUserType("admin");
+      foundUser = { adminId: 1 };
+    } else if (foundInstructor) {
       setInstructor(foundInstructor);
-      localStorage.setItem("user", JSON.stringify(foundInstructor));
-      console.log("foundInstructor");
+      setUserType("instructor");
+      foundUser = foundInstructor;
+      // localStorage.setItem("user", JSON.stringify(foundInstructor));
     } else if (foundStudent) {
       setStudent(foundStudent);
-      localStorage.setItem("user", JSON.stringify(foundStudent));
+      setUserType("student");
+      foundUser = foundStudent;
+      // localStorage.setItem("user", JSON.stringify(foundStudent));
     } else {
       alert("Invalid email or password");
+      return;
     }
-
-    // Leave this as is pang save sa localStorage lang to
+    localStorage.setItem("user", JSON.stringify(foundUser));
+    setIsLoggedIn(true);
   };
 
   const logout = () => {
+    // remove all states value
     localStorage.removeItem("user");
+    setUserType("");
     setStudent(null);
-    // pag nalagay na sa storage si user set to loggedIn(false) na
+    setInstructor(null);
+    setAccessMode(false);
     setIsLoggedIn(false);
-    // idk if need pa to, just keep it incase
-    // <Navigate to={"/"} />;
+    setLoading(false);
   };
 
   return (
     <UserContext.Provider
       value={{
+        userType,
         student,
         instructor,
         loading,

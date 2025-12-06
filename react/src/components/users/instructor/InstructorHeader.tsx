@@ -1,11 +1,14 @@
 import { IoMdNotifications } from "react-icons/io";
 import { useUserContext } from "../../../helpers/context";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 function InstructorHeader() {
-  // const [openSidebar, setOpenSidebar] = useState(false);
   const { instructor } = useUserContext();
-
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const currentPage =
+    currentPath.split("/")[2][0].toLocaleUpperCase() +
+    currentPath.split("/")[2].slice(1);
   if (!instructor) {
     return;
   }
@@ -22,9 +25,17 @@ function InstructorHeader() {
                     "
         >
           <div className="font-semibold text-xl flex gap-2 items-center">
-            <p>
-              Attend<strong className="text-xl text-blue-500">EX</strong>
-            </p>
+            <span className="font-semibold text-xl">
+              {currentPage === "Class-list" ? (
+                <div>Class List</div>
+              ) : currentPage === "Dashboard" ? (
+                <div>
+                  Attend<strong className="text-xl text-blue-400">EX</strong>
+                </div>
+              ) : (
+                <div>{currentPage}</div>
+              )}
+            </span>
             <span className="px-2 py-1 text-xs rounded-full bg-blue-900 text-white">
               Instructor Mode
             </span>
@@ -63,6 +74,7 @@ function InstructorHeader() {
           </div>
         </div>
       </header>
+      <title>{`AttendEx - ${currentPage}`}</title>
     </>
   );
 }

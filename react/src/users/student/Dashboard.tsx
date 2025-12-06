@@ -56,7 +56,7 @@ function Dashboard() {
                 <em className="font-bold text-xl">Staff Access</em>
               </span>
               <button
-                className="text-xs font-semibold p-3 rounded-full bg-white text-blue-900"
+                className="text-xs font-semibold p-3 rounded-full bg-white text-blue-900 cursor-pointer active:scale-90"
                 onClick={() => {
                   mode();
                 }}

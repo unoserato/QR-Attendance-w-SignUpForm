@@ -69,7 +69,6 @@ function Header() {
           </div>
         </div>
       </header>
-      <title>{`AttendEx - ${currentPage}`}</title>
     </>
   );
 }

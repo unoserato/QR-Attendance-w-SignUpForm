@@ -45,6 +45,7 @@ function StaffHeader() {
           </div>
         </div>
       </header>
+      <title>{`AttendEx - ${currentPage}`}</title>
     </>
   );
 }

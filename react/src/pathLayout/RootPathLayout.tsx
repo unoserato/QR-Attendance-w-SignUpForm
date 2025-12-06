@@ -4,23 +4,19 @@ import { useEffect } from "react";
 import SwitchAccessLoader from "../components/global/SwitchAccessLoader";
 
 function RootPathLayout() {
-  const {
-    student,
-    instructor,
-    loading,
-    accessMode,
-    isLoggedIn,
-    switchAnimation,
-  } = useUserContext();
+  const { userType, loading, accessMode, isLoggedIn, switchAnimation } =
+    useUserContext();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (loading && isLoggedIn) return;
 
     if (isLoggedIn) {
-      if (instructor !== undefined) {
+      if (userType === "admin") {
+        navigate("/admin/dashboard", { replace: true });
+      } else if (userType === "instructor") {
         navigate("/instructor/dashboard", { replace: true });
-      } else if (student !== undefined) {
+      } else if (userType === "student") {
         if (accessMode) {
           navigate("/staff/dashboard", { replace: true });
         } else {
@@ -30,7 +26,7 @@ function RootPathLayout() {
     } else {
       navigate("/", { replace: true });
     }
-  }, [student, instructor, navigate, accessMode, isLoggedIn, loading]);
+  }, [userType, navigate, accessMode, isLoggedIn, loading]);
 
   return (
     <div className="w-dvw h-dvh">
