@@ -35,10 +35,12 @@ function StaffHeader() {
             </span>
           </div>
           <div className="text-xs sm:text-sm p-1 rounded">
-            <select name="school-year" id="school-year">
-              <option value="1-2025-2026" selected={true}>
-                1st 2025-2026
-              </option>
+            <select
+              name="school-year"
+              id="school-year"
+              defaultValue={"1-2025-2026"}
+            >
+              <option value="1-2025-2026">1st 2025-2026</option>
             </select>
           </div>
         </div>

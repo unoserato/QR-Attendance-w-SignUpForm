@@ -1,7 +1,7 @@
-import { FaClipboardList, FaUserCircle } from "react-icons/fa";
+import { FaClipboardList } from "react-icons/fa";
 import { IoMdQrScanner } from "react-icons/io";
 import { LuActivity } from "react-icons/lu";
-import { MdDashboard, MdEvent } from "react-icons/md";
+import { MdAnalytics, MdDashboard, MdEvent, MdPeople } from "react-icons/md";
 import { SiGoogleclassroom } from "react-icons/si";
 
 export const studentLinks = [
@@ -50,15 +50,28 @@ export const authorizedStaffLinks = [
     icon: <FaClipboardList />,
   },
   {
-    name: "Activities",
-    path: "/staff/activities",
-    icon: <LuActivity />,
+    name: "Users",
+    path: "/staff/users",
+    icon: <MdPeople />,
   },
 
   {
-    name: "Profile",
-    path: "/staff/profile",
-    icon: <FaUserCircle />,
+    name: "Analytics",
+    path: "/staff/analytics",
+    icon: <MdAnalytics />,
+  },
+];
+
+export const instructorLinks = [
+  {
+    name: "Dashboard",
+    path: "/instructor/dashboard",
+    icon: <MdDashboard />,
+  },
+  {
+    name: "Class List",
+    path: "/instructor/class-list",
+    icon: <SiGoogleclassroom />,
   },
 ];
 

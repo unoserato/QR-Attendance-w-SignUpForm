@@ -8,12 +8,14 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const { user, login } = useUserContext();
+  const { student, instructor, login } = useUserContext();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     login(email, password);
-    if (user) {
+    if (instructor) {
+      navigate("/instructor/dashboard", { replace: true });
+    } else if (student) {
       navigate("/student/dashboard", { replace: true });
     }
   }

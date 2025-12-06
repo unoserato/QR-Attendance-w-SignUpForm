@@ -1,4 +1,5 @@
 import eventList from "./eventList";
+const events = eventList;
 
 const activityList = [
   {
@@ -67,6 +68,138 @@ const activityList = [
     endDate: "2025-11-25T15:00:00",
     scannerRole: "P.I.O. 1",
   },
+  {
+    id: 7,
+    eventID: 6,
+    name: "Act2 for event 3",
+    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
+    points: 10,
+    location: "Gym",
+    startDate: "2025-11-25T08:00:00",
+    endDate: "2025-11-25T15:00:00",
+    scannerRole: "P.I.O. 1",
+  },
+  {
+    id: 8,
+    eventID: 6,
+    name: "Act2 for event 3",
+    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
+    points: 10,
+    location: "Gym",
+    startDate: "2025-11-25T08:00:00",
+    endDate: "2025-11-25T15:00:00",
+    scannerRole: "P.I.O. 1",
+  },
+  {
+    id: 9,
+    eventID: 6,
+    name: "Act2 for event 3",
+    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
+    points: 10,
+    location: "Gym",
+    startDate: "2025-11-25T08:00:00",
+    endDate: "2025-11-25T15:00:00",
+    scannerRole: "P.I.O. 1",
+  },
+  {
+    id: 10,
+    eventID: 6,
+    name: "Act2 for event 3",
+    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
+    points: 10,
+    location: "Gym",
+    startDate: "2025-11-25T08:00:00",
+    endDate: "2025-11-25T15:00:00",
+    scannerRole: "P.I.O. 1",
+  },
+  {
+    id: 11,
+    eventID: 6,
+    name: "Act2 for event 3",
+    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
+    points: 10,
+    location: "Gym",
+    startDate: "2025-11-25T08:00:00",
+    endDate: "2025-11-25T15:00:00",
+    scannerRole: "P.I.O. 1",
+  },
+  {
+    id: 12,
+    eventID: 6,
+    name: "Act2 for event 3",
+    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
+    points: 10,
+    location: "Gym",
+    startDate: "2025-11-25T08:00:00",
+    endDate: "2025-11-25T15:00:00",
+    scannerRole: "P.I.O. 1",
+  },
+  {
+    id: 13,
+    eventID: 6,
+    name: "Act2 for event 3",
+    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
+    points: 10,
+    location: "Gym",
+    startDate: "2025-11-25T08:00:00",
+    endDate: "2025-11-25T15:00:00",
+    scannerRole: "P.I.O. 1",
+  },
+  {
+    id: 14,
+    eventID: 6,
+    name: "Act2 for event 3",
+    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
+    points: 10,
+    location: "Gym",
+    startDate: "2025-11-25T08:00:00",
+    endDate: "2025-11-25T15:00:00",
+    scannerRole: "P.I.O. 1",
+  },
+  {
+    id: 15,
+    eventID: 6,
+    name: "Act2 for event 3",
+    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
+    points: 10,
+    location: "Gym",
+    startDate: "2025-11-25T08:00:00",
+    endDate: "2025-11-25T15:00:00",
+    scannerRole: "P.I.O. 1",
+  },
+  {
+    id: 16,
+    eventID: 6,
+    name: "Act2 for event 3",
+    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
+    points: 10,
+    location: "Gym",
+    startDate: "2025-11-25T08:00:00",
+    endDate: "2025-11-25T15:00:00",
+    scannerRole: "P.I.O. 1",
+  },
+  {
+    id: 17,
+    eventID: 6,
+    name: "Act2 for event 3",
+    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
+    points: 10,
+    location: "Gym",
+    startDate: "2025-11-25T08:00:00",
+    endDate: "2025-11-25T15:00:00",
+    scannerRole: "P.I.O. 1",
+  },
+  {
+    id: 18,
+    eventID: 6,
+    name: "Act2 for event 3",
+    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque pariatur, ab mollitia non quo quis laborum minima maiores eius ratione distinctio, libero, nihil repellendus repellat aliquam. Necessitatibus dicta velit iure.",
+    points: 10,
+    location: "Gym",
+    startDate: "2025-11-25T08:00:00",
+    endDate: "2025-11-25T15:00:00",
+    scannerRole: "P.I.O. 1",
+  },
 ];
 
 export interface ActivityType {
@@ -82,10 +215,26 @@ export interface ActivityType {
 }
 
 // function
-const events = eventList;
-export function getEventName(id: number) {
+export function getEventName(id: Number) {
   const ev = events.find((e) => e.id === id);
   return ev ? ev.name : "Unknown Event";
+}
+
+export function getActivityById(id: Number) {
+  const activity = activityList.find((a) => a.id === id);
+  return activity;
+}
+
+export function getActivityStatus(id: Number) {
+  const activity = activityList.find((a) => a.id === id);
+  if (!activity) return "Unknown";
+
+  const now = new Date();
+  const start = new Date(activity.startDate);
+  const end = new Date(activity.endDate);
+
+  if (now >= start && now <= end) return "Ongoing";
+  return "Ended";
 }
 
 export default activityList;

@@ -136,7 +136,6 @@ export function checkCredentials(email: string, password: string) {
   const foundUser = userList.find(
     (u) => u.studentID === foundCredentials.studentID
   );
-  localStorage.setItem("user", JSON.stringify(foundUser));
   return foundUser;
 }
 
@@ -145,7 +144,7 @@ export function getStudentById(id: string) {
   return student;
 }
 
-export interface User {
+export interface StudentType {
   id: number;
   studentID: string;
   lastName: string;

@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { SiGoogleclassroom } from "react-icons/si";
 
 function Dashboard() {
-  const { user, mode } = useUserContext();
+  const { student, mode } = useUserContext();
   const navigate = useNavigate();
   const [unattendedCount, setunattendedCount] = useState(0);
   // const unattendedCount = 0;
@@ -16,7 +16,7 @@ function Dashboard() {
   useEffect(() => {
     // 1. Get the IDs of the activities this student attended
     const attendedIDs = attendanceList
-      .filter((att) => att.studentID === user?.studentID)
+      .filter((att) => att.studentID === student?.studentID)
       .map((att) => att.actID);
 
     // 2. Get the activities the student did NOT attend
@@ -27,7 +27,7 @@ function Dashboard() {
     setunattendedCount(notAttended.length);
   }, []);
 
-  if (!user) {
+  if (!student) {
     return <FullPageLoader />;
   }
   return (
@@ -37,7 +37,7 @@ function Dashboard() {
           {/* greetings header */}
           <div className="flex flex-col gap-1 py-3">
             <h2 className="text-3xl font-bold">
-              Hello, <span className="text-blue-500">{user.lastName}!</span>
+              Hello, <span className="text-blue-500">{student.lastName}!</span>
             </h2>
             <p className="text-md text-neutral-600">
               Today is{" "}
@@ -49,7 +49,7 @@ function Dashboard() {
             </p>
           </div>
           {/* switch acccess card */}
-          {user.isStaff && (
+          {student.isStaff && (
             <div className="flex justify-between items-center bg-blue-900 rounded-xl p-4 ">
               <span className="text-sm text-white">
                 You are eligible for <br />
@@ -84,7 +84,7 @@ function Dashboard() {
             </div>
             {unattendedCount > 0 && (
               <div
-                className="flex items-center justify-center text-xs font-semibold p-2 bg-white text-red-500 rounded-md"
+                className="flex items-center justify-center text-xs font-semibold p-2 bg-white text-red-500 rounded-md cursor-pointer"
                 onClick={() => navigate("/student/qr", { replace: true })}
               >
                 <p className="whitespace-nowrap">Generate QR</p>

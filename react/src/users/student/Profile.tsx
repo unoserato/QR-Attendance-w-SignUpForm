@@ -5,14 +5,14 @@ import FullPageLoader from "../../components/global/FullPageLoader";
 
 function Profile() {
   const navigate = useNavigate();
-  const { user, logout } = useUserContext();
+  const { student, logout } = useUserContext();
   let suffix;
 
-  if (!user) {
+  if (!student) {
     return <FullPageLoader />;
   }
 
-  switch (user.year) {
+  switch (student.year) {
     case 1:
       suffix = "st";
       break;
@@ -37,12 +37,12 @@ function Profile() {
           <div className="flex items-center justify-center w-full">
             <div className="flex flex-col items-center w-full">
               <a
-                href={user.profileURL}
+                href={student.profileURL}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <img
-                  src={user.profileURL}
+                  src={student.profileURL}
                   alt="Profile Picture"
                   width={200}
                   height={200}
@@ -67,12 +67,12 @@ function Profile() {
             w-full"
           >
             <h2 className="text-2xl">
-              {user.lastName}, {user.firstName} {user.middleName[0]}.
+              {student.lastName}, {student.firstName} {student.middleName[0]}.
             </h2>
-            <h3 className="text-sm text-neutral-500">{user.major}</h3>
+            <h3 className="text-sm text-neutral-500">{student.major}</h3>
             <h4 className="text-xs font-semibold text-neutral-500">
-              {user.year}
-              {suffix} Year | BS {user.course}
+              {student.year}
+              {suffix} Year | BS {student.course}
             </h4>
             <h5></h5>
           </div>

@@ -3,17 +3,17 @@ import { useUserContext } from "../../helpers/context";
 import FullPageLoader from "../../components/global/FullPageLoader";
 
 function QR() {
-  const { user } = useUserContext();
+  const { student } = useUserContext();
   const [loading, setLoading] = useState(true);
   const [qrData, setQrData] = useState<string>("");
 
   useEffect(() => {
-    if (!user) return;
+    if (!student) return;
 
     const API_URL =
       "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=";
 
-    const encodedID = encodeURIComponent(btoa(user.studentID));
+    const encodedID = encodeURIComponent(btoa(student.studentID));
     const qrURL = `${API_URL}${encodedID}`;
 
     const image = new Image();
@@ -26,9 +26,9 @@ function QR() {
     return () => {
       image.onload = null;
     };
-  }, [user]);
+  }, [student]);
 
-  if (!user) return <FullPageLoader />;
+  if (!student) return <FullPageLoader />;
 
   return (
     <>
@@ -55,7 +55,7 @@ function QR() {
             <>
               <img src={qrData} alt="my qr code" className="w-full p-4" />
               <h2 className="text-xl font-semibold text-center">
-                {user.lastName}, {user.firstName} {user.middleName[0]}.
+                {student.lastName}, {student.firstName} {student.middleName[0]}.
               </h2>
             </>
           )}
@@ -78,7 +78,7 @@ function QR() {
 //   useEffect(() => {
 //     if (!user) return;
 //     const attendedIDs = attendanceList
-//       .filter((att) => att.studentID === user.studentID)
+//       .filter((att) => att.studentID === student.studentID)
 //       .map((att) => att.actID);
 
 //     const notAttended = activitiesList.filter(
@@ -183,7 +183,7 @@ function QR() {
 //             <img src={qr} alt="my qr code" className="w-full p-4" />
 //             <p className="text-sm text-blue-900 text-center">{selectedAct}</p>
 //             <h2 className="text-xl font-semibold text-center">
-//               {user.lastName}, {user.firstName} {user.middleName[0]}.
+//               {student.lastName}, {student.firstName} {student.middleName[0]}.
 //             </h2>
 //           </>
 //         )}
@@ -205,7 +205,7 @@ function QR() {
 //           >
 //             <option value="">Select Activity to generate QR</option>
 //             {qrOptions.map((qr) => (
-//               <option key={qr.id} value={`${qr.id}_${user.studentID}`}>
+//               <option key={qr.id} value={`${qr.id}_${student.studentID}`}>
 //                 {qr.name}
 //               </option>
 //             ))}

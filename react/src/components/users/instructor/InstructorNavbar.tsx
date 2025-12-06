@@ -1,11 +1,11 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { authorizedStaffLinks } from "../../global/navlinks";
+import { instructorLinks } from "../../global/navlinks";
 import React from "react";
 // import { useUserContext } from "../../../helpers/context";
 
-export default function StaffNavbar() {
+function InstructorNavbar() {
   // const { user } = useUserContext();
-  const links = authorizedStaffLinks;
+  const links = instructorLinks;
   const navigate = useNavigate();
   const handleNav = (path: string) => navigate(`${path}`, { replace: true });
 
@@ -49,3 +49,5 @@ export default function StaffNavbar() {
     </>
   );
 }
+
+export default InstructorNavbar;

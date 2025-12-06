@@ -1,9 +1,15 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { checkCredentials, type User } from "./userList";
+import { checkCredentials, type StudentType } from "./studentList";
+import {
+  checkInstructorCredentials,
+  type InstructorType,
+} from "./instructorList";
+// import { Navigate } from "react-router-dom";
 
 // eto yung parang parameters ng buong function
 interface UserContextType {
-  user: User | null;
+  student: StudentType | null;
+  instructor: InstructorType | null;
   loading: boolean;
   // global switching para pag refresh same mode parin
   accessMode: boolean;
@@ -25,7 +31,8 @@ export const UserContext = createContext<UserContextType | undefined>(
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [student, setStudent] = useState<StudentType | null>(null);
+  const [instructor, setInstructor] = useState<InstructorType | null>(null);
   const [loading, setLoading] = useState(true); // loading for slow render
   const [accessMode, setAccessMode] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,7 +43,12 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
-      setUser(parsedUser);
+
+      if ("studentID" in parsedUser) {
+        setStudent(parsedUser);
+      } else if ("instructorId" in parsedUser) {
+        setInstructor(parsedUser);
+      }
       setIsLoggedIn(true);
     }
 
@@ -49,7 +61,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   const mode = () => {
-    if (user?.isStaff) {
+    if (student?.isStaff) {
       // get current mode from sessionStorage (if it exists)
       const currentMode = JSON.parse(
         sessionStorage.getItem("accessMode") || "false"
@@ -70,28 +82,38 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // dummy login function eto babaguhin mo
   const login = (email: string, password: string) => {
-    const foundUser = checkCredentials(email, password);
-    if (!foundUser) {
+    const foundInstructor = checkInstructorCredentials(email, password);
+    const foundStudent = checkCredentials(email, password);
+    console.log("reached Login Function");
+
+    if (foundInstructor) {
+      setInstructor(foundInstructor);
+      localStorage.setItem("user", JSON.stringify(foundInstructor));
+      console.log("foundInstructor");
+    } else if (foundStudent) {
+      setStudent(foundStudent);
+      localStorage.setItem("user", JSON.stringify(foundStudent));
+    } else {
       alert("Invalid email or password");
-      return;
     }
 
     // Leave this as is pang save sa localStorage lang to
-    localStorage.setItem("user", JSON.stringify(foundUser));
-    setUser(foundUser);
   };
 
   const logout = () => {
     localStorage.removeItem("user");
-    setUser(null);
+    setStudent(null);
     // pag nalagay na sa storage si user set to loggedIn(false) na
     setIsLoggedIn(false);
+    // idk if need pa to, just keep it incase
+    // <Navigate to={"/"} />;
   };
 
   return (
     <UserContext.Provider
       value={{
-        user,
+        student,
+        instructor,
         loading,
         accessMode,
         isLoggedIn,

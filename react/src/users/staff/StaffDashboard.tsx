@@ -2,9 +2,9 @@ import FullPageLoader from "../../components/global/FullPageLoader";
 import { useUserContext } from "../../helpers/context";
 
 function StaffDashboard() {
-  const { user, mode } = useUserContext();
+  const { student, mode } = useUserContext();
 
-  if (!user) {
+  if (!student) {
     return <FullPageLoader />;
   }
 
@@ -16,7 +16,7 @@ function StaffDashboard() {
           <h2 className="text-3xl font-bold">
             Welcome, <br />{" "}
             <span className="text-blue-500">
-              {user.role} {user.lastName}!
+              {student.role} {student.lastName}
             </span>
           </h2>
           <p className="text-md text-neutral-500">

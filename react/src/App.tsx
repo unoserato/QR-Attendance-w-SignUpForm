@@ -19,12 +19,16 @@ import { UserProvider } from "./helpers/context";
 import StaffPagePathLayout from "./pathLayout/StaffPagePathLayout";
 import StaffDashboard from "./users/staff/StaffDashboard";
 import SignUpForm from "./components/guest/SignUpForm";
-import StaffEvents from "./users/staff/StaffEvents";
 import StaffQR from "./users/staff/StaffQR";
-import StaffActivities from "./users/staff/StaffActivities";
 import ErrorPage from "./components/global/ErrorPage";
 import StaffAttendance from "./users/staff/StaffAttendance";
 import StaffEventsActivitites from "./users/staff/StaffEventsActivitites";
+import InstructorPagePathLayout from "./pathLayout/InstructorPagePathLayout";
+import InstructorDashboard from "./users/instructor/InstructorDashboard";
+import InstructorClassList from "./users/instructor/InstructorClassList";
+import InstructorProfile from "./users/instructor/InstructorProfile";
+import AdminPagePathLayout from "./pathLayout/AdminPagePathLayout";
+import AdminDashboard from "./users/admin/AdminDashboard";
 // import { useEffect } from "react";
 
 const router = createBrowserRouter(
@@ -45,7 +49,7 @@ const router = createBrowserRouter(
         <Route path="profile" element={<Profile />}></Route>
         <Route path="*" element={<ErrorPage />}></Route>
       </Route>
-      <Route path="/staff" element={<StaffPagePathLayout />}>
+      <Route path="staff" element={<StaffPagePathLayout />}>
         <Route index element={<Navigate to="dashboard" />}></Route>
         <Route path="dashboard" element={<StaffDashboard />}></Route>
         {/* <Route path="events" element={<StaffEvents />}></Route> */}
@@ -54,6 +58,15 @@ const router = createBrowserRouter(
         <Route path="attendance" element={<StaffAttendance />}></Route>
         {/* <Route path="activities" element={<StaffActivities />}></Route> */}
         <Route path="*" element={<ErrorPage />}></Route>
+      </Route>
+      <Route path="instructor" element={<InstructorPagePathLayout />}>
+        <Route index element={<Navigate to="dashboard" />}></Route>
+        <Route path="dashboard" element={<InstructorDashboard />}></Route>
+        <Route path="class-list" element={<InstructorClassList />}></Route>
+        <Route path="profile" element={<InstructorProfile />}></Route>
+      </Route>
+      <Route path="admin" element={<AdminPagePathLayout />}>
+        <Route path="dashboard" element={<AdminDashboard />}></Route>
       </Route>
       <Route path="*" element={<ErrorPage />}></Route>
     </Route>

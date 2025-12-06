@@ -9,7 +9,7 @@ import { useUserContext } from "../../helpers/context";
 import { getAttendanceByStudentId } from "../../helpers/attendance";
 
 function Activities() {
-  const { user } = useUserContext();
+  const { student } = useUserContext();
   const acts = activitiesList || [];
   const events = eventList || [];
   const [openAct, setOpenAct] = useState(false);
@@ -21,9 +21,9 @@ function Activities() {
     return <FullPageLoader />;
   }
 
-  if (!user) return; // wait until user is available
+  if (!student) return; // wait until user is available
 
-  const attendance = getAttendanceByStudentId(user.studentID);
+  const attendance = getAttendanceByStudentId(student.studentID);
 
   // compute filtered list without mutating original `acts`
   const filteredActs = acts

@@ -3,23 +3,23 @@ import activitiesList, { type ActivityType } from "../../helpers/activityList";
 import { useUserContext } from "../../helpers/context";
 import FullPageLoader from "../../components/global/FullPageLoader";
 import { Scanner, type IDetectedBarcode } from "@yudiel/react-qr-scanner";
-import type { User } from "../../helpers/userList";
-import userList from "../../helpers/userList";
+import type { StudentType } from "../../helpers/studentList";
+import userList from "../../helpers/studentList";
 
 function StaffQR() {
-  const { user } = useUserContext();
+  const { student } = useUserContext();
   const acts = activitiesList || [];
   const students = userList || [];
   const [scannerFor, setScannerFor] = useState<ActivityType | null>(null);
   // const [scanned, setScanned] = useState<IDetectedBarcode[] | null>(null);
   const [pausedScanner, setPausedScanner] = useState(true);
-  const [scannedList, setScannedList] = useState<User[]>([]);
-  const [backupList, setBackupList] = useState<User[]>([]);
+  const [scannedList, setScannedList] = useState<StudentType[]>([]);
+  const [backupList, setBackupList] = useState<StudentType[]>([]);
 
   useEffect(() => {
-    const matchedAct = acts.find((act) => act.scannerRole === user?.role);
+    const matchedAct = acts.find((act) => act.scannerRole === student?.role);
     if (matchedAct) setScannerFor(matchedAct);
-  }, [user, acts]);
+  }, [student, acts]);
 
   // function playBeep() {
   //   const audioCtx = new AudioContext();
@@ -84,7 +84,7 @@ function StaffQR() {
   //   }
   // }
 
-  if (!user) return <FullPageLoader />;
+  if (!student) return <FullPageLoader />;
 
   return (
     <div className="flex flex-col gap-4 p-4">

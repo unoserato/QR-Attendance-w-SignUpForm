@@ -1,17 +1,12 @@
 import { IoMdNotifications } from "react-icons/io";
 import { useUserContext } from "../../../helpers/context";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-function Header() {
+function InstructorHeader() {
   // const [openSidebar, setOpenSidebar] = useState(false);
-  const { student } = useUserContext();
-  const location = useLocation();
-  const currentPath = location.pathname;
-  const currentPage =
-    currentPath.split("/")[2][0].toLocaleUpperCase() +
-    currentPath.split("/")[2].slice(1);
+  const { instructor } = useUserContext();
 
-  if (!student) {
+  if (!instructor) {
     return;
   }
 
@@ -26,14 +21,13 @@ function Header() {
                     shadow-neutral-100
                     "
         >
-          <div className="font-semibold text-xl">
-            {currentPage == "Dashboard" ? (
-              <p>
-                Attend<strong className="text-xl text-blue-500">EX</strong>
-              </p>
-            ) : (
-              <p>{currentPage}</p>
-            )}
+          <div className="font-semibold text-xl flex gap-2 items-center">
+            <p>
+              Attend<strong className="text-xl text-blue-500">EX</strong>
+            </p>
+            <span className="px-2 py-1 text-xs rounded-full bg-blue-900 text-white">
+              Instructor Mode
+            </span>
           </div>
           <div className="flex gap-2 items-center relative">
             <div className="relative">
@@ -47,7 +41,7 @@ function Header() {
               }
             >
               <img
-                src={student.profileURL}
+                src={instructor.profileURL}
                 alt="Profile"
                 className="object-cover border border-blue-900 w-[clamp(2rem,3dvh,3rem)] rounded-full aspect-square"
               />
@@ -69,9 +63,8 @@ function Header() {
           </div>
         </div>
       </header>
-      <title>{`AttendEx - ${currentPage}`}</title>
     </>
   );
 }
 
-export default Header;
+export default InstructorHeader;
