@@ -10,7 +10,7 @@ export default function Navbar() {
   return (
     <>
       {/* mobile view only */}
-      <footer className="block sm:hidden bg-white shadow-[0_0_10px_#e5e5e5] p-2">
+      <footer className="block bg-white shadow-[0_0_10px_#e5e5e5] p-2">
         <nav>
           <ul className="m-0 p-0 flex justify-evenly">
             {links.map((link) => (

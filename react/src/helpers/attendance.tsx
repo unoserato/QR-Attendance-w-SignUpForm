@@ -1,3 +1,5 @@
+import { getAllActivities } from "./activityList";
+
 const attendanceList = [
   {
     id: 1,
@@ -90,6 +92,20 @@ const attendanceList = [
     time: "2025-11-25T08:00:00",
     scannedBy: "IT Representative",
   },
+  {
+    id: 14,
+    actID: 10,
+    studentID: "0223-2127",
+    time: "2025-11-25T08:00:00",
+    scannedBy: "IT Representative",
+  },
+  {
+    id: 16,
+    actID: 3,
+    studentID: "0223-2127",
+    time: "2025-11-25T08:00:00",
+    scannedBy: "IT Representative",
+  },
 ];
 
 export function getAttendanceByActId(id: Number) {
@@ -100,6 +116,23 @@ export function getAttendanceByActId(id: Number) {
 export function getAttendanceByStudentId(id: string) {
   const attendance = attendanceList.filter((a) => a.studentID === id);
   return attendance;
+}
+
+export function getMissingAttendanceByStudentId(studentId: String) {
+  const acts = getAllActivities();
+
+  // All attendance records of this student
+  const studentAttendance = attendanceList.filter(
+    (att) => att.studentID === studentId
+  );
+
+  // Get actIDs the student attended
+  const attendedActIds = studentAttendance.map((att) => att.actID);
+
+  // Filter activities where student did NOT attend
+  const missing = acts.filter((act) => !attendedActIds.includes(act.id));
+
+  return missing;
 }
 
 export interface AttendanceType {

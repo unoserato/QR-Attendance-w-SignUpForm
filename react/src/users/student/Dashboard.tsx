@@ -1,35 +1,21 @@
 import { FaCheck } from "react-icons/fa";
 import FullPageLoader from "../../components/global/FullPageLoader";
-import activitiesList from "../../helpers/activityList";
 import { useUserContext } from "../../helpers/context";
 import { useNavigate } from "react-router-dom";
-import attendanceList from "../../helpers/attendance";
-import { useEffect, useState } from "react";
+import { getMissingAttendanceByStudentId } from "../../helpers/attendance";
 import { SiGoogleclassroom } from "react-icons/si";
 
 function Dashboard() {
   const { student, mode } = useUserContext();
   const navigate = useNavigate();
-  const [unattendedCount, setunattendedCount] = useState(0);
-  // const unattendedCount = 0;
-
-  useEffect(() => {
-    // 1. Get the IDs of the activities this student attended
-    const attendedIDs = attendanceList
-      .filter((att) => att.studentID === student?.studentID)
-      .map((att) => att.actID);
-
-    // 2. Get the activities the student did NOT attend
-    const notAttended = activitiesList.filter(
-      (act) => !attendedIDs.includes(act.id)
-    );
-
-    setunattendedCount(notAttended.length);
-  }, []);
 
   if (!student) {
     return <FullPageLoader />;
   }
+
+  const missingAttendance = getMissingAttendanceByStudentId(
+    student.studentID
+  ).length;
   return (
     <>
       <div className="w-full h-full overflow-y-auto">
@@ -68,21 +54,25 @@ function Dashboard() {
           {/* missing attendance card */}
           <div
             className={`flex justify-between p-4 rounded-xl text-white  ${
-              unattendedCount > 0 ? "bg-red-500" : "bg-green-500"
+              missingAttendance > 0 ? "bg-red-500" : "bg-green-500"
             }`}
           >
             <div className="flex w-full gap-2 items-center">
               <div className="flex items-center justify-center rounded-full w-10 aspect-square border-2 font-bold">
-                {unattendedCount > 0 ? <p>{unattendedCount}</p> : <FaCheck />}
+                {missingAttendance > 0 ? (
+                  <p>{missingAttendance}</p>
+                ) : (
+                  <FaCheck />
+                )}
               </div>
 
               <p className="text-md font-bold">
-                {unattendedCount > 0
+                {missingAttendance > 0
                   ? "Missing Attendance"
                   : "Attendace Complete"}
               </p>
             </div>
-            {unattendedCount > 0 && (
+            {missingAttendance > 0 && (
               <div
                 className="flex items-center justify-center text-xs font-semibold p-2 bg-white text-red-500 rounded-md cursor-pointer"
                 onClick={() => navigate("/student/qr", { replace: true })}

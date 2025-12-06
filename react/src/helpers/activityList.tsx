@@ -225,6 +225,10 @@ export function getActivityById(id: Number) {
   return activity;
 }
 
+export function getAllActivities() {
+  return activityList;
+}
+
 export function getActivityStatus(id: Number) {
   const activity = activityList.find((a) => a.id === id);
   if (!activity) return "Unknown";

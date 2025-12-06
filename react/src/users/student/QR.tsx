@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useUserContext } from "../../helpers/context";
 import FullPageLoader from "../../components/global/FullPageLoader";
+import { getMissingAttendanceByStudentId } from "../../helpers/attendance";
+import { FaCheck } from "react-icons/fa";
 
 function QR() {
   const { student } = useUserContext();
@@ -32,8 +34,9 @@ function QR() {
 
   return (
     <>
-      <div className="flex flex-col gap-4 p-4">
-        <div className="flex flex-col gap-2 shadow-md bg-white aspect-square w-full rounded-xl border-t-5 border-t-blue-500 p-4">
+      <div className="flex flex-col sm:flex-row gap-4 p-4">
+        {/* card mismo */}
+        <div className="flex flex-col sm:w-1/3 gap-2 shadow-md bg-white w-full rounded-xl border-t-5 border-t-blue-500 p-4">
           <div className="flex flex-col gap-1">
             <h2 className="text-xl font-semibold text-center">
               My Student ID Code
@@ -59,6 +62,52 @@ function QR() {
               </h2>
             </>
           )}
+        </div>
+        <div className="flex flex-col gap-2 bg-white shadow-md p-4 rounded-xl w-full sm:w-2/3 ">
+          <div
+            className={`flex w-full gap-2 items-center ${
+              getMissingAttendanceByStudentId(student.studentID).length > 0
+                ? "text-red-500"
+                : "text-green-500"
+            }`}
+          >
+            <div className="flex items-center justify-center rounded-full w-10 aspect-square border-2 font-bold">
+              {getMissingAttendanceByStudentId(student.studentID).length > 0 ? (
+                <p>
+                  {getMissingAttendanceByStudentId(student.studentID).length}
+                </p>
+              ) : (
+                <FaCheck />
+              )}
+            </div>
+
+            <p className="text-md font-bold">
+              {getMissingAttendanceByStudentId(student.studentID).length > 0
+                ? "Missing Attendance"
+                : "Attendace Complete"}
+            </p>
+          </div>
+          <ul className="flex flex-col w-full overflow-y-auto">
+            <div className="text-xs sm:text-sm flex w-full bg-black/10">
+              <div className="w-full">Activity Name</div>
+              <div className="w-full">Location</div>
+              <div className="w-full">Scanner</div>
+            </div>
+            {getMissingAttendanceByStudentId(student.studentID).map(
+              (missing) => (
+                <>
+                  <li
+                    key={missing.id}
+                    className={`text-xs sm:text-sm flex items-center w-full`}
+                  >
+                    <div className="w-full">{missing.name}</div>
+                    <div className="w-full">{missing.location}</div>
+                    <div className="w-full">{missing.scannerRole}</div>
+                  </li>
+                </>
+              )
+            )}
+          </ul>
         </div>
       </div>
     </>

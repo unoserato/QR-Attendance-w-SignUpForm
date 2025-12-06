@@ -93,7 +93,7 @@ function Activities() {
           {filteredActs.length === 0 ? (
             <p className="text-sm text-neutral-500">No activities found.</p>
           ) : (
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2 sm:grid sm:grid-cols-3">
               {filteredActs.map((act) => (
                 <li
                   key={act.id}

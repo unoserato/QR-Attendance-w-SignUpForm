@@ -94,7 +94,7 @@ function Events() {
           </div>
         </div>
         {/* List */}
-        <ul className="flex flex-col gap-4 p-4">
+        <ul className="flex flex-col gap-4 p-4 sm:grid sm:grid-cols-3">
           {filteredEvents.map((event) => (
             <li
               key={event.id}
